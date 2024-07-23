@@ -16,18 +16,18 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/user" className=" hover:text-red-500">
-              <p>User</p>
+            <Link href="/allproducts" className=" hover:text-red-500">
+              <p>All Products</p>
             </Link>
           </li>
           <li>
-            <Link href="/create" className=" hover:text-red-500">
-              <p>create</p>
+            <Link href="/addproduct" className=" hover:text-red-500">
+              <p>Add Product</p>
             </Link>
           </li>
           <li>
             <Link href="/" className=" hover:text-red-500">
-              <p>Logout</p>
+              <p>Dark Mode</p>
             </Link>
           </li>
         </ul>
