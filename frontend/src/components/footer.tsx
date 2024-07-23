@@ -7,10 +7,10 @@ export function Footer() {
     return (
       <div className="relative w-full">
   <Container className="mt-10 w-full">
-    <div className="w-full pt-5 border-t border-red-500 dark:border-trueGray-700">
+    <div className="w-full pt-5 border-t border-cyan-500 dark:border-trueGray-700">
       <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-3">
         <div className="flex justify-start w-full lg:w-auto">
-          <div className="text-lg font-semibold">Follow us</div>
+          <div className="text-lg font-bold">Follow us</div>
         </div>
         <div className="flex justify-end w-full lg:w-auto space-x-2 text-black dark:text-black">
           <a href="https://x.com" target="_blank" rel="noopener">
@@ -33,7 +33,7 @@ export function Footer() {
       </div>
     </div>
 
-    <div className="my-1 text-sm text-center text-gray-600 dark:text-gray-400 w-full">
+    <div className="my-1 text-sm font-bold text-center text-black dark:text-gray-400 w-full">
       Copyright © {new Date().getFullYear()}. Made with ♥ by Deshan Ravindra
     </div>
   </Container>
