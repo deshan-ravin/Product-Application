@@ -4,8 +4,46 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import NavBar from "@/components/nav";
 import { ProductCard } from "@/components/productcard";
+import { useState } from "react";
+import Product from "@/lib/types";
 
 export default function Home() {
+
+  const products: Product[] = [
+    {name: "Product 1",
+    description: "This is a product description",
+    price: 100,
+    type: "Type 1",
+    image: "https://via.placeholder.com/150",},
+    {
+      name: "Product 2",
+      description: "This is another product description",
+      price: 200,
+      type: "Type 2",
+      image: "https://via.placeholder.com/150"
+  },
+  {
+      name: "Product 3",
+      description: "This is a different product description",
+      price: 150,
+      type: "Type 3",
+      image: "https://via.placeholder.com/150"
+  },
+  {
+      name: "Product 4",
+      description: "This is a unique product description",
+      price: 250,
+      type: "Type 4",
+      image: "https://via.placeholder.com/150"
+  },
+  {
+      name: "Product 5",
+      description: "This is yet another product description",
+      price: 300,
+      type: "Type 5",
+      image: "https://via.placeholder.com/150"
+  }
+  ];
 
   const userName = " Deshan";
 
@@ -35,12 +73,16 @@ export default function Home() {
         </h3>
 
         <div className="flex flex-wrap items-center justify-center w-full max-w-1xl gap-5 mt-10 mx-auto">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {
+              products.map((products, index) => (
+                <ProductCard key={index} 
+                  name={products.name}
+                  description={products.description}
+                  price={products.price}
+                  type={products.type}
+                  image={products.image} />
+              ))
+            }
         </div>
 
   <Footer />

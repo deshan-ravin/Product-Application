@@ -20,7 +20,16 @@ import {
 import Link from "next/link"
 import Image from "next/image" // Import the 'Image' component
 
-export function ProductCard() {
+interface ProductProps {
+  name: string;
+  description: string;
+  price: number;
+  type: string;
+  image: string;
+}
+
+
+export function ProductCard(props: ProductProps) {
 
   const truncateText = (text: string, wordLimit: number) => {
     const words = text.split(" ")
@@ -34,7 +43,14 @@ export function ProductCard() {
   return (
     <Link
       href={{
-        pathname: "/product"
+        pathname: "/product",
+        query: {
+          name: props.name,
+          description: props.description,
+          price: props.price,
+          type: props.type,
+          image: props.image,
+        },
       }}
     >
       <Card className="w-[350px] h-[450px] overflow-auto shadow-lg rounded-lg p-4 flex flex-col justify-between">
@@ -42,18 +58,18 @@ export function ProductCard() {
         <Image src="/sunglass.jpg" alt="Logo" width={400} height={40} className="rounded-lg" />
         </div>
         <h1 className="text-2xl font-bold font-sans w-full mt-2">
-          Product Name
+          {props.name}
         </h1>
         <p className="mt-5">{truncateText(description, 15)}
         </p>
         <div className="flex justify-between mt-5">
           <div>
             Price:
-            <h3 className="text-lg font-bold">200$</h3>
+            <h3 className="text-lg font-bold">{props.price}</h3>
           </div>
           <div>
             Type:
-            <h3 className="text-lg font-bold">Eye Wear</h3>
+            <h3 className="text-lg font-bold">{props.type}</h3>
           </div>
         </div>
       </Card>
