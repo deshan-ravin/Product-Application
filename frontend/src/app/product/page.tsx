@@ -17,7 +17,7 @@ export default function ArticlePage() {
     <main className="flex min-h-screen flex-col items-center justify-center pt-25 pb-24 pl-24 pr-24 bg-zinc-300">
       <Navbar />
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-left flex mt-10 mb-4 text-red-600">
+        <h1 className="text-4xl font-bold text-left flex mt-10 mb-4 text-cyan-600">
           {userName}
         </h1>
       </div>
@@ -47,7 +47,6 @@ export default function ArticlePage() {
         </CardContent>
 
         <div className="p-4 flex justify-between">
-          <DeleteBtn/>
           <Link
             href={{
               pathname: "/update",
@@ -59,7 +58,7 @@ export default function ArticlePage() {
               }
             }}
           >
-            <button className="px-6 py-3 text-lg font-medium text-white bg-red-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
+            <button className="px-6 py-3 text-lg font-medium text-white bg-cyan-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
               Purchase
             </button>
           </Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "./togglemode";
 //import { ModeToggle } from "./themeprovider";
 
 const Navbar = () => {
@@ -25,12 +26,9 @@ const Navbar = () => {
               <p>Add Product</p>
             </Link>
           </li>
-          <li>
-            <Link href="/" className=" hover:text-cyan-500">
-              <p>Dark Mode</p>
-            </Link>
-          </li>
         </ul>
+          <ModeToggle />
+        
       </div>
     </div>
   </div>
