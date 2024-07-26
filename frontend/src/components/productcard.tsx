@@ -30,7 +30,7 @@ export function ProductCard() {
     >
       <Card className="w-[350px] h-[400px] overflow-auto bg-white shadow-lg rounded-lg p-4 flex flex-col justify-between">
       <div>
-        <Image src="/next.svg" alt="Logo" width={200} height={200} />
+        <Image src="/sunglass.jpg" alt="Logo" width={200} height={200} />
         </div>
       </Card>
     </Link>

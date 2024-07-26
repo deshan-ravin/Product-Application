@@ -11,22 +11,22 @@ const Navbar = () => {
       <div className="flex justify-between items-center h-full">
         <ul className="flex w-full justify-evenly text-white">
           <li>
-            <Link href="/" className=" hover:text-red-500">
+            <Link href="/" className=" hover:text-cyan-500">
               <p>Home</p>
             </Link>
           </li>
           <li>
-            <Link href="/allproducts" className=" hover:text-red-500">
+            <Link href="/allproducts" className=" hover:text-cyan-500">
               <p>All Products</p>
             </Link>
           </li>
           <li>
-            <Link href="/addproduct" className=" hover:text-red-500">
+            <Link href="/addproduct" className=" hover:text-cyan-500">
               <p>Add Product</p>
             </Link>
           </li>
           <li>
-            <Link href="/" className=" hover:text-red-500">
+            <Link href="/" className=" hover:text-cyan-500">
               <p>Dark Mode</p>
             </Link>
           </li>
