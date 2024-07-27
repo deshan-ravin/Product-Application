@@ -44,7 +44,7 @@ export default function Home() {
       </h2>
 
       <div className="flex items-center justify-center py-10 bg-zinc-300">
-        <a href="/create">
+        <a href="/addproduct">
           <button className="px-6 py-3 text-lg font-medium text-white bg-cyan-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
             Add Product
           </button>

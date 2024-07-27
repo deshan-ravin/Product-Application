@@ -2,7 +2,7 @@
 import Navbar from "@/components/nav";
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Footer } from "@/components/footer";
-import Link from "next/link";
+import Image from "next/image"; // Import the Image component
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -16,8 +16,8 @@ export default function ArticlePage() {
 
   const [userName, setUserName] = useState("Deshan");
 
-  useEffect (() => {
-    const url = new URL (window.location.href);
+  useEffect(() => {
+    const url = new URL(window.location.href);
     const name = url.searchParams.get("name");
     const description = url.searchParams.get("description");
     const price = url.searchParams.get("price");
@@ -42,18 +42,32 @@ export default function ArticlePage() {
         </h1>
       </div>
 
-
-      <Card className="w-full max-w-3xl p-4 mt-8"> 
+      <Card className="w-full max-w-3xl p-4 mt-8">
         <CardHeader>
+
+        <div className="flex justify-center mb-6">
+            {/* Display the image */}
+            {image && (
+              <Image
+                src={image}
+                alt={name}
+                width={600} // Adjust width as needed
+                height={400} // Adjust height as needed
+                className="rounded-lg" // Optional styling
+              />
+            )}
+          </div>
+
           <div className="flex justify-between items-center">
-            <CardTitle className="text-2xl font-bold">{price}</CardTitle>
-            <CardDescription className="text-gray-500">{type}</CardDescription>
+            <CardTitle className="text-2xl font-bold">${price}</CardTitle>
+            <CardDescription className="text-2xl font-bold">{type}</CardDescription>
           </div>
         </CardHeader>
         <CardContent>
           <div className="text-center mb-6">
             <h2 className="text-4xl font-bold text-black">{name}</h2>
           </div>
+          
           <div>
             <p className="text-lg text-black">
               {description.split("\n").map((paragraph, index) => (
@@ -67,7 +81,7 @@ export default function ArticlePage() {
         </CardContent>
       </Card>
 
-      <Footer/>
+      <Footer />
     </main>
   );
 }

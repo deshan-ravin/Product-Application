@@ -37,6 +37,7 @@ export default function AddProduct() {
   });
 
   const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false); // Added loading state
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -56,6 +57,7 @@ export default function AddProduct() {
 
   const addProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the form is submitted
 
     try {
       let uploadedImageURL = '';
@@ -78,7 +80,10 @@ export default function AddProduct() {
       setNewProduct({ name: "", type: "", description: "", price: 0, image: null });
       setSubmissionStatus("Product Added Successfully 👌");
     } catch (error) {
-      console.error("Error adding product: Try Aagain! ", error);
+      console.error("Error adding product: Try Again! ", error);
+      setSubmissionStatus("Error adding product. Please try again.");
+    } finally {
+      setLoading(false); // Set loading to false once the process is complete
     }
   };
 
@@ -91,7 +96,11 @@ export default function AddProduct() {
         </h1>
       </div>
 
-      {submissionStatus ? (
+      {loading ? (
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <h2 className="text-4xl font-bold text-blue-600">Loading...</h2>
+        </div>
+      ) : submissionStatus ? (
         <div className="flex flex-col items-center justify-center min-h-screen">
           <h2 className="text-4xl font-bold text-green-600">{submissionStatus}</h2>
         </div>
@@ -132,7 +141,7 @@ export default function AddProduct() {
                   </button>
                 </a>
                 <button type="submit" className="px-6 py-3 text-lg font-medium text-white bg-cyan-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
-                  Add
+                  Add Product
                 </button>
               </div>
             </form>

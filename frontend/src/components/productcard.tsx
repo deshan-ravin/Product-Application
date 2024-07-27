@@ -33,7 +33,7 @@ export function ProductCard(props: ProductProps) {
   const truncateText = (text: string, wordLimit: number) => {
     const words = text.split(" ");
     return words.length > wordLimit
-      ? words.slice(0, wordLimit).join(" ") + "..."
+      ? words.slice(0, wordLimit).join(" ") + " ect..."
       : text;
   };
 
@@ -50,7 +50,7 @@ export function ProductCard(props: ProductProps) {
         },
       }}
     >
-      <Card className="w-[350px] h-[450px] overflow-auto shadow-lg rounded-lg p-4 flex flex-col justify-between">
+      <Card className="w-[350px] h-[600px] overflow-auto shadow-lg rounded-lg p-4 flex flex-col justify-between">
         <div>
           {/* Use the image prop for the Image component */}
           <Image
