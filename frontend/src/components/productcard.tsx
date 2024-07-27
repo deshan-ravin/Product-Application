@@ -65,11 +65,11 @@ export function ProductCard(props: ProductProps) {
         <div className="flex justify-between mt-5">
           <div>
             Price:
-            <h3 className="text-lg font-bold">{props.price}</h3>
+            <h3 className="text-lg font-bold">${props.price}</h3>
           </div>
           <div>
             Type:
-            <h3 className="text-lg font-bold">{props.type}</h3>
+            <h3 className="text-lg font-bold">{props.type} </h3>
           </div>
         </div>
       </Card>

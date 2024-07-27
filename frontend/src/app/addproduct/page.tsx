@@ -7,34 +7,75 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Footer } from "@/components/footer";
+import { storage, db } from '../../config/firebase'; // Import Firebase
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Import storage functions
+import { collection, addDoc } from 'firebase/firestore'; // Import Firestore functions
 
 export default function AddProduct() {
-  const [file, setFile] = useState<File | null>(null);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFile(event.target.files[0]);
+  const [products, setProducts] = useState([
+    {
+      name: "product 1",
+      type: "type1",
+      description: "this is the description",
+      price: 20,
+      image: "image1"
     }
+  ]);
+
+  const [newProduct, setNewProduct] = useState<{
+    name: string;
+    type: string;
+    description: string;
+    price: number;
+    image: File | null; // Set the type to File | null
+  }>({
+    name: "",
+    type: "",
+    description: "",
+    price: 0,
+    image: null // Set to null initially
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setNewProduct({
+      ...newProduct,
+      [name]: value
+    });
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    if (file) {
-      formData.append('file', file);
-    }
-
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setNewProduct({
+      ...newProduct,
+      image: file
     });
+  };
 
-    if (response.ok) {
-      console.log('Product added successfully');
-    } else {
-      console.error('Failed to add product');
+  const addProduct = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      let uploadedImageURL = '';
+
+      if (newProduct.image) {
+        const storageRef = ref(storage, `images/${newProduct.image.name}`);
+        const snapshot = await uploadBytes(storageRef, newProduct.image);
+        uploadedImageURL = await getDownloadURL(snapshot.ref);
+      }
+
+      const productData = {
+        ...newProduct,
+        price: Number(newProduct.price),
+        image: uploadedImageURL,
+      };
+
+      await addDoc(collection(db, "products"), productData);
+
+      setProducts([...products, productData]);
+      setNewProduct({ name: "", type: "", description: "", price: 0, image: null });
+    } catch (error) {
+      console.error("Error adding product: ", error);
     }
   };
 
@@ -55,29 +96,29 @@ export default function AddProduct() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="grid gap-6">
+          <form className="grid gap-6" onSubmit={addProduct}>
             <div className="grid gap-3 font-bold">
               <Label htmlFor="name">Product Name</Label>
-              <Input id="name" name="name" type="text" className="w-full"/>
+              <Input id="name" name="name" type="text" className="w-full" value={newProduct.name} onChange={handleInputChange} />
             </div>
             <div className="grid gap-3 font-bold">
               <Label htmlFor="type">Product Type</Label>
-              <Input id="type" name="type" type="text" className="w-full"/>
+              <Input id="type" name="type" type="text" className="w-full" value={newProduct.type} onChange={handleInputChange} />
             </div>
             <div className="grid gap-3 font-bold">
               <Label htmlFor="description">Description</Label>
-              <Textarea id="description" name="description" className="h-60 w-full"/>
+              <Textarea id="description" name="description" className="h-60 w-full" value={newProduct.description} onChange={handleInputChange} />
             </div>
             <div className="grid gap-3 font-bold">
               <Label htmlFor="price">Price - [$]</Label>
-              <Input id="price" name="price" type="text" className="w-full"/>
+              <Input id="price" name="price" type="number" className="w-full" value={newProduct.price} onChange={handleInputChange} />
             </div>
             <div className="grid gap-3 font-bold">
               <Label htmlFor="file">Upload Image</Label>
-              <Input id="file" name="file" type="file" className="w-full" onChange={handleFileChange}/>
+              <Input id="file" name="file" type="file" className="w-full" onChange={handleFileChange} />
             </div>
             <div className="p-4 flex justify-between">
-              <a href="/user">
+              <a href="/allproducts">
                 <button type="button" className="px-6 py-3 text-lg font-medium text-cyan-800 bg-white rounded-md hover:bg-zinc-400 hover:text-cyan-700 transition duration-300">
                   Cancel
                 </button>
@@ -90,7 +131,7 @@ export default function AddProduct() {
         </CardContent>
       </Card>
 
-      <Footer/>
+      <Footer />
     </main>
   );
 }
