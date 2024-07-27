@@ -14,7 +14,7 @@ export default function ArticlePage() {
   const [type, setType] = useState("");
   const [image, setImage] = useState("");
 
-  const [userName, setUserName] = useState("Deshan");
+  const [userName, setUserName] = useState("👀 You're looking for..");
 
   useEffect(() => {
     const url = new URL(window.location.href);
