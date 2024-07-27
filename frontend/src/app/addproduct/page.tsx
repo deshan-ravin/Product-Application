@@ -36,6 +36,8 @@ export default function AddProduct() {
     image: null // Set to null initially
   });
 
+  const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewProduct({
@@ -74,6 +76,7 @@ export default function AddProduct() {
 
       setProducts([...products, productData]);
       setNewProduct({ name: "", type: "", description: "", price: 0, image: null });
+      setSubmissionStatus("Product Added Successfully");
     } catch (error) {
       console.error("Error adding product: ", error);
     }
@@ -128,6 +131,11 @@ export default function AddProduct() {
               </button>
             </div>
           </form>
+          {submissionStatus && (
+            <div className="mt-4 text-green-500 font-bold">
+              {submissionStatus}
+            </div>
+          )}
         </CardContent>
       </Card>
 

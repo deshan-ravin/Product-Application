@@ -6,7 +6,7 @@ import NavBar from "@/components/nav";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between pb-20 pt-2 min-h-screen">
+    <main className="flex flex-col items-center justify-between pb-20 pt-2 bg-zinc-300 min-h-screen">
       <NavBar />
 
       <div className="mt-16 flex flex-wrap items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-cyan-500 px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-xl">
