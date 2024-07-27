@@ -76,9 +76,9 @@ export default function AddProduct() {
 
       setProducts([...products, productData]);
       setNewProduct({ name: "", type: "", description: "", price: 0, image: null });
-      setSubmissionStatus("Product Added Successfully");
+      setSubmissionStatus("Product Added Successfully 👌");
     } catch (error) {
-      console.error("Error adding product: ", error);
+      console.error("Error adding product: Try Aagain! ", error);
     }
   };
 
@@ -87,57 +87,58 @@ export default function AddProduct() {
       <Navbar />
       <div className="container mx-auto">
         <h1 className="text-4xl font-bold text-left flex mt-10 mb-4 text-cyan-600">
-          Deshan 👦
+          What's On Your Mind 👻
         </h1>
       </div>
 
-      <Card className="w-full max-w-3xl p-4 mt-8">
-        <CardHeader>
-          <CardTitle>Add Your New Product 🎒</CardTitle>
-          <CardDescription className="text-cyan-500">
-            PRODUCT DASHBOARD
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form className="grid gap-6" onSubmit={addProduct}>
-            <div className="grid gap-3 font-bold">
-              <Label htmlFor="name">Product Name</Label>
-              <Input id="name" name="name" type="text" className="w-full" value={newProduct.name} onChange={handleInputChange} />
-            </div>
-            <div className="grid gap-3 font-bold">
-              <Label htmlFor="type">Product Type</Label>
-              <Input id="type" name="type" type="text" className="w-full" value={newProduct.type} onChange={handleInputChange} />
-            </div>
-            <div className="grid gap-3 font-bold">
-              <Label htmlFor="description">Description</Label>
-              <Textarea id="description" name="description" className="h-60 w-full" value={newProduct.description} onChange={handleInputChange} />
-            </div>
-            <div className="grid gap-3 font-bold">
-              <Label htmlFor="price">Price - [$]</Label>
-              <Input id="price" name="price" type="number" className="w-full" value={newProduct.price} onChange={handleInputChange} />
-            </div>
-            <div className="grid gap-3 font-bold">
-              <Label htmlFor="file">Upload Image</Label>
-              <Input id="file" name="file" type="file" className="w-full" onChange={handleFileChange} />
-            </div>
-            <div className="p-4 flex justify-between">
-              <a href="/allproducts">
-                <button type="button" className="px-6 py-3 text-lg font-medium text-cyan-800 bg-white rounded-md hover:bg-zinc-400 hover:text-cyan-700 transition duration-300">
-                  Cancel
+      {submissionStatus ? (
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <h2 className="text-4xl font-bold text-green-600">{submissionStatus}</h2>
+        </div>
+      ) : (
+        <Card className="w-full max-w-3xl p-4 mt-8">
+          <CardHeader>
+            <CardTitle>Add Your New Product 🎒</CardTitle>
+            <CardDescription className="text-cyan-500">
+              PRODUCT DASHBOARD
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form className="grid gap-6" onSubmit={addProduct}>
+              <div className="grid gap-3 font-bold">
+                <Label htmlFor="name">Product Name</Label>
+                <Input id="name" name="name" type="text" className="w-full" value={newProduct.name} onChange={handleInputChange} />
+              </div>
+              <div className="grid gap-3 font-bold">
+                <Label htmlFor="type">Product Type</Label>
+                <Input id="type" name="type" type="text" className="w-full" value={newProduct.type} onChange={handleInputChange} />
+              </div>
+              <div className="grid gap-3 font-bold">
+                <Label htmlFor="description">Description</Label>
+                <Textarea id="description" name="description" className="h-60 w-full" value={newProduct.description} onChange={handleInputChange} />
+              </div>
+              <div className="grid gap-3 font-bold">
+                <Label htmlFor="price">Price - [$]</Label>
+                <Input id="price" name="price" type="number" className="w-full" value={newProduct.price} onChange={handleInputChange} />
+              </div>
+              <div className="grid gap-3 font-bold">
+                <Label htmlFor="file">Upload Image</Label>
+                <Input id="file" name="file" type="file" className="w-full" onChange={handleFileChange} />
+              </div>
+              <div className="p-4 flex justify-between">
+                <a href="/allproducts">
+                  <button type="button" className="px-6 py-3 text-lg font-medium text-cyan-800 bg-white rounded-md hover:bg-zinc-400 hover:text-cyan-700 transition duration-300">
+                    Cancel
+                  </button>
+                </a>
+                <button type="submit" className="px-6 py-3 text-lg font-medium text-white bg-cyan-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
+                  Add
                 </button>
-              </a>
-              <button type="submit" className="px-6 py-3 text-lg font-medium text-white bg-cyan-600 rounded-md hover:bg-zinc-400 hover:text-white transition duration-300">
-                Add
-              </button>
-            </div>
-          </form>
-          {submissionStatus && (
-            <div className="mt-4 text-green-500 font-bold">
-              {submissionStatus}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      )}
 
       <Footer />
     </main>
